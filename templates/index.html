@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% block title %}Infyni Knowledge Platform{% endblock %}
+{% load staticfiles %}
+{% block custom_bread %}
+{% endblock %}
+
+{% block custom_js %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock custom_js%}
+
+
+
+{% block content %}
+
+
+<div class="home-sec" id="home">
+	<div class="overlay">
+		<div class="container">
+			<div class="row text-center ">
+
+				<div class="col-lg-12  col-md-12 col-sm-12">
+
+					<div class="flexslider set-flexi" id="main-section">
+						<ul class="slides move-me">
+							<!-- Slider 01 -->
+							<li>
+								<h3>Delivering Quality Education</h3>
+								<h1>THE UNIQUE METHOD</h1> 
+							</li>
+							<!-- End Slider 01 -->
+
+							<!-- Slider 02 -->
+							<li>
+								<h3>Delivering Quality Education</h3>
+								<h1>UNMATCHED APPROACH</h1> 
+							</li>
+							<!-- End Slider 02 -->
+
+							<!-- Slider 03 -->
+							<li>
+								<h3>Delivering Quality Education</h3>
+								<h1>AWESOME FACULTY PANEL</h1>
+							</li>
+							<!-- End Slider 03 -->
+						</ul>
+					</div>
+
+
+
+
+				</div>
+
+			</div>
+		</div>
+    </div>
+    
+ 
+    <div  class="tag-line" >
+        <div class="container">
+          <div class="row  text-center" >
+          
+              <div class="col-lg-12  col-md-12 col-sm-12">
+                <a  href="#features-sec" class="scrolldown" ><i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+       <!-- <h2 data-scroll-reveal="enter from the bottom after 0.1s" ><i class="fa fa-circle-o-notch"></i> Welcome To Infyni <i class="fa fa-circle-o-notch"></i> </h2> -->
+                  </div>
+              </div>
+            </div>
+       
+   </div>
+
+</div>
+<!--HOME SECTION END-->
+           
+       
+       
+  
+
+<!--banner end-->
+<!--feature start-->
+
+<div id="features-sec" class="container features-sec " >
+             <div class="row text-center">
+                 <div class="col-lg-12 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                     <h1 data-scroll-reveal="enter from the bottom after 0.2s"  class="header-line">FEATURE LIST </h1>
+                     <p data-scroll-reveal="enter from the bottom after 0.3s" >
+                      We offer students a open learning platform where they can learn from leading industry experts, professors and authors. <br/>
+                      ​			Platform would also enable students to develop professional network​ right from their education institute.
+                         </p>
+                 </div>
+
+             </div>
+             <!--/.HEADER LINE END-->
+
+
+           <div class="row mt-4" >
+           
+               
+                 <div class="col-lg-4  col-md-4 col-sm-4 f-list" data-scroll-reveal="enter from the bottom after 0.4s"> 
+                     <i class="fa fa-paper-plane-o " ></i>
+                   <h3 >Quality Education</h3> 
+                   <p >
+                       You will have quality education
+                       
+                   </p>
+               <a href="#" class="btn"  >ASK THE EXPERT</a> 
+                   </div>
+
+
+
+                   <div class="col-lg-4  col-md-4 col-sm-4 f-list " data-scroll-reveal="enter from the bottom after 0.5s"> 
+                     <i class="fa fa-bolt " ></i>
+                   <h3 >SYSTEMATIC APPROACH</h3> 
+                   <p >
+                       Instructor will use systematic approach
+                       
+                   </p>
+               <a href="#" class="btn"  >ASK THE EXPERT</a> 
+                   </div>
+
+
+                 <div class="col-lg-4  col-md-4 col-sm-4 f-list" data-scroll-reveal="enter from the bottom after 0.6s"> 
+                     <i class="fa fa-magic " ></i>
+                   <h3 >ONE TO ONE STUDY</h3> 
+                   <p > Ask your question </p>
+               <a href="#" class="btn"  >ASK THE EXPERT</a> 
+                   </div>
+                 
+                 
+               </div>
+             </div>
+             
+             
+	
+<!--feature end-->
+<!--module1 start-->
+
+<div id="course-sec" class="container set-pad course-sec">
+             <div class="text-center">
+                 <div class="col-lg-12 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                     <h1 data-scroll-reveal="enter from the bottom after 0.1s" class="header-line">Our Courses </h1>
+                     <p data-scroll-reveal="enter from the bottom after 0.3s">
+                      Explore Our Courses Taught By Experts
+                         </p>
+                 </div>
+
+             </div>
+             <!--/.HEADER LINE END-->
+
+
+           <div class="row mt-5 mb-5 pb-3 pt-2" >
+           <div class="col-lg-12 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+             <!--   <div class="module"> -->
+               <div class="">
+               <div class="group_list">
+               <!-- <div class="module1_2 box">
+							<div class="imgslide2">
+								<ul class="imgs">
+                                    {% for banner_course in banner_courses %}
+                                    <li>
+                                        <a href="{% url 'course:course_detail' banner_course.id %}">
+                                            <img width="350" height="300" src="{{ MEDIA_URL }}{{ banner_course.image }}" />
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+								</ul>
+							</div>
+							<div class="unslider-arrow2 prev"></div>
+							<div class="unslider-arrow2 next"></div>
+                        </div> -->
+                        <ul class="courseRow clearfix">
+                   {% for course in courses %}
+                            <li class="clearfix courseBox">
+                              
+                            <a href="{% url 'course:course_detail' course.id %}">
+                            <div class="imgC">
+                              <img src="{{ MEDIA_URL }}{{ course.image }}"/>
+                            </div>
+                               
+            <div class="desc">
+            <h2 title="{{ course.name }}">{{ course.name }}</h2>
+            <h3 ><i class="key">{{ course.get_degree_display }}</i></h3>
+            <h4 >Students: <i class="key">{{ course.students }}</i></h4>
+            <h4 class="boldT" title="{{ course.name }}">{{ course.course_org.name }}</h4>
+            </div>  
+                            </a>
+
+                                 <div class="bottom clearfix">
+                                    <span class="star fr">{{ course.fav_nums }}</span>
+                                </div>  
+
+                            </li>
+                            {% endfor %}
+
+                        </ul>
+                            </div>
+                  
+             
+                 </div>
+                 
+              <!--  </div> -->
+               </div>
+               
+             </div>
+	
+		</div>
+	<!-- <div id="contact-sec"   >
+           <div class="overlay">
+ <div class="container set-pad">
+      <div class="row text-center">
+                 <div class="col-lg-12 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                     <h1 data-scroll-reveal="enter from the bottom after 0.1s" class="header-line" >Contact Us  </h1>
+                     <p data-scroll-reveal="enter from the bottom after 0.3s">
+                     Drop Us Mail For Your Query, Will Get Back within 24 Hours!
+                         </p>
+                 </div>
+
+             </div>
+             /.HEADER LINE END
+           <div class="row set-row-pad"  data-scroll-reveal="enter from the bottom after 0.5s" >
+           
+               
+                 <div class="col-lg-12 col-lg-offset-2 col-md-12 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control "  required="required" placeholder="Your Name" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control " required="required"  placeholder="Your Email" />
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" required="required" class="form-control" style="min-height: 150px;" placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info btn-block btn-lg">Submit Request</button>
+                        </div>
+
+                    </form>
+                </div>
+
+                   
+     
+              
+              
+                
+               </div>
+                </div>
+          </div> 
+       </div> -->
+{% endblock content %}
+

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}Course list - {{block.super}}{% endblock %}
+{% load staticfiles %}
+{% block custom_bread %}
+<section class="breadCrumbC">
+        <div class="wp">
+            <ul  class="crumbs">
+                <li><a href="{% url 'index' %}">Main page</a>></li>
+                <li>Courses</li>
+            </ul>
+        </div>
+</section>
+{% endblock %}
+{% block content %}
+    <section class="courseList-wrap">
+	<div class="wp">
+		<div>
+			<div class="">
+				<div class="tab_headerCont">
+					<ul class="tab_header clearfix">
+						<li class="{% if sort == "" %}active{% endif %}"><a href="?sort=">Newest </a></li>
+						<li class="{% if sort == "hot" %}active{% endif %}"><a href="?sort=hot">Hotest</a></li>
+						<li class="{% if sort == "students" %}active{% endif %}"><a href="?sort=students">Students</a></li>
+					</ul>
+				</div>
+                <div id="inWindow">
+                    <div class=" " id="content">
+					<div class="group_list">
+                            <ul class="courseRow clearfix">
+                        {% for course in all_courses.object_list %}
+                        <li class="clearfix courseBox">
+                              
+                                <a class="d-block clearfix" href="{% url 'course:course_detail' course.id %}">
+                                <div class="imgC">
+                                  <img src="{{ MEDIA_URL }}{{ course.image }}"/>
+                                </div>
+                                   
+                <div class="desc">
+                <h2 title="{{ course.name }}">{{ course.name }}</h2>
+                <h3 ><i class="key">{{ course.get_degree_display }}</i></h3>
+                <h4 >Students: <i class="key">{{ course.students }}</i></h4>
+                <h4 class="boldT provider" title="{{ course.name }}">{{ course.course_org.name }}</h4>
+                </div>  
+                                </a>
+    
+                                     <div class="bottom clearfix">
+                                        <span class="star fr">{{ course.fav_nums }}</span>
+                                    </div>  
+    
+                                </li>
+                        {% endfor %}
+                            </ul>
+
+					</div>
+                    <!-- <div class="pageturn">
+                        <ul class="pagelist">
+                            {% if all_courses.has_previous %}
+                                <li class="long"><a href="?{{ all_courses.previous_page_number.querystring }}">Previous page</a></li>
+                            {% endif %}
+                            {% for page in all_courses.pages %}
+                                {% if page %}
+                                    {% ifequal page all_courses.number %}
+                                        <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                    {% else %}
+                                        <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                    {% endifequal %}
+                                {% else %}
+                                    <li class="none"><a href="">...</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if all_courses.has_next %}
+                                <li class="long"><a href="?{{ all_courses.next_page_number.querystring }}">Next page</a></li>
+                            {% endif %}
+                        </ul>
+
+                    </div> -->
+				    </div>
+                </div>
+			</div>
+		
+		</div>
+	</div>
+</section>
+{% endblock %}
+

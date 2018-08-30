@@ -1,0 +1,156 @@
+Follow below steps to setup Infyni Django app on Ubuntu server
+It uses Nginx web server and Gunicorn app server
+
+ssh -i ~{pem_loc}/infyni-prod.pem ubuntu@35.154.14.189
+
+infyni  db
+13.126.217.129:3306/mxonline
+user=user1
+password=start123
+
+
+Ubuntu setup
+
+Ubuntu 16.04 comes by default with Python 3.5.1 installed as the python3 binary. Python 2 is still installable using the python package:
+
+sudo apt-get install python
+sudo apt-get install python-pip
+pip search virtualenv
+
+pip install virtualenv
+
+python -m pip uninstall pip (to uninstall pip)
+
+Create a user for your app, named mxonline and assigned to a system group called webapps.
+
+
+sudo groupadd --system webapps
+sudo useradd --system --gid webapps --shell /bin/bash --home /webapps/olp-django mxonline
+
+sudo mkdir -p /webapps/olp-django/
+
+sudo chown mxonline /webapps/olp-django/
+
+sudo su - mxonline
+
+cd /webapps/
+
+git clone https://mkrsinha5@bitbucket.org/mkrsinha5/olp-django.git
+
+python -m virtualenv venv
+
+To create a virtual environment, go to your project’s directory and run virtualenv.
+python -m virtualenv venv
+
+source venv/bin/activate
+
+deactivate
+
+pip install -r requirements.txt
+
+if get this error 
+Complete output from command python setup.py egg_info:
+    sh: 1: mysql_config: not found
+    
+    EnvironmentError: mysql_config not found
+    
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-install-B0Shh5/MySQL-python/
+
+deactivate
+exit
+then run this command 
+
+sudo apt-get install libmysqlclient-dev
+
+then activate venv and switch user 
+pip install -r requirements.txt
+
+logon in mysql server 
+mysql -uroot -ppassword
+
+CREATE DATABASE mxonline;
+
+GRANT ALL PRIVILEGES ON mxonline.* To 'user1'@'%' IDENTIFIED BY 'start123';
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py createsuperuser
+admin / start123
+
+python manage.py runserver 172.31.27.120:8000
+
+
+sudo chown -R mxonline:users /webapps/olp-django
+
+sudo chmod -R g+w /webapps/olp-django
+sudo usermod -a -G users `whoami`
+
+pip install gunicorn
+gunicorn MxOnline.wsgi:application --bind 172.31.27.120:8001
+
+
+Gunicorn is installed and ready to serve your app. Let’s set some configuration options to make it more useful. I like to set a number of parameters, so let’s put them all into a small BASH script, which I save as bin/gunicorn_start.sh
+
+sudo chmod u+x bin/gunicorn_start.sh
+
+pip install setproctitle
+
+
+apt-get install supervisor
+
+service supervisor restart
+
+When Supervisor is installed you can give it programs to start and watch by creating configuration files in the /etc/supervisor/conf.d directory. For our mxonline application we’ll create a file named /etc/supervisor/conf.d/mxonline.conf with content from bin/mxonline.conf
+
+sudo vi /etc/supervisor/conf.d/mxonline.conf
+
+Create the file to store your application’s log messages:
+
+mkdir -p /webapps/olp-django/logs/
+touch /webapps/olp-django/logs/gunicorn_supervisor.log
+
+After you save the configuration file for your program you can ask supervisor to reread configuration files and update (which will start your the newly registered app).
+sudo supervisorctl reread
+
+sudo supervisorctl update
+
+You can also check the status of your app or start, stop or restart it using supervisor.
+
+sudo supervisorctl status mxonline                       
+sudo supervisorctl stop mxonline  
+sudo supervisorctl start mxonline                        
+sudo supervisorctl restart mxonline 
+
+
+Time to set up Nginx as a server for out application and its static files. Install and start Nginx:
+
+sudo apt-get install nginx
+
+sudo service nginx start
+
+Create an Nginx virtual server configuration for Django
+
+Each Nginx virtual server should be described by a file in the /etc/nginx/sites-available directory. You select which sites you want to enable by making symbolic links to those in the /etc/nginx/sites-enabled directory.
+
+Create a new nginx server configuration file for your Django application running on example.com in /etc/nginx/sites-available/mxonline. The file should contain /bin/nginxconf
+
+Create a symbolic link in the sites-enabled folder:
+
+sudo ln -s /etc/nginx/sites-available/mxonline /etc/nginx/sites-enabled/mxonline
+
+Restart Nginx:
+
+sudo service nginx restart 
+
+If you navigate to your site, you should now see your Django welcome-page powered by Nginx and Gunicorn.
+
+Django App AMI in Mumbai region
+AMI name: infyni-django-app
+AMI ID: ami-a897bfc7
+
+in PROD nginx: server_name infyni.com;
+
+UBUNTU OLP: 35.154.14.189
+EC2-USER Music: 13.127.118.166

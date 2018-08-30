@@ -1,0 +1,318 @@
+{% extends 'usercenter-base.html' %}
+{% block title %}My Lessons-{{block.super}}{% endblock %}
+
+{% block custom_bread %}
+    <section class="breadCrumbC">
+        <div class="wp">
+            <ul  class="crumbs">
+                <li><a href="{% url 'index' %}">Main</a>></li>
+                <li><a href="{% url 'users:user_info' %}">User center</a>></li>
+                <li>Registered lessons</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
+{% block right_content %}
+    <div class="right" >
+		<div class="personal_des Releasecont">
+			<div class="head">
+				<h1>My Lessons</h1>
+			</div>
+		</div>
+		<div class="personal_des permessage">
+			<div class="companycenter">
+				<div class="group_list brief">
+                    {% for lesson in lessons %}
+                        <div data-id={{ lesson.id }} class="module1_5 box lesson_div" style="height:100% !important">
+                            <a href="#">
+                                <img width="214" height="190" class="scrollLoading" src="{{ MEDIA_URL }}{{ lesson.lesson.course.image }}"  />
+                            </a>
+<!--                             <div class="des">
+                                <a href="#"><h2>{{ lesson.lesson.name }}</h2></a>
+                            </div> -->
+                            <div>
+                            <h1 style="text-align: center; height: 70px;padding-top: 10px;">{{ lesson.lesson.name }}</h1>
+                            <span class="fl">Sta:<i class="key">
+                            {{ lesson.class_start|date:'Y/m/d, H:i a' }} </i></span> 
+                            <a class="edit_class_start" data-id={{ lesson.id }} style="margin-left: 4px">edit</a> 
+                            <div data-id={{ lesson.id }} class="edit_class_start_div">
+                                <span><input class="edit_class_start_input" type="datetime-local" /></span>
+                                <span class="edit_class_start_save" data-id={{ lesson.id }}><a>save</a></span>
+                                <span class="edit_class_start_cancel" data-id={{ lesson.id }}><a>cancel</a></span>
+                                <br>
+                            </div>
+
+
+
+                            <span class="fl">End:<i class="key">{{ lesson.class_end|date:'Y/m/d, H:i a' }}</i></span>
+                            <a class="edit_class_end" data-id={{ lesson.id }} style="margin-left: 4px">edit</a> 
+                            <div data-id={{ lesson.id }} class="edit_class_end_div">
+                                <span><input class="edit_class_end_input" type="datetime-local" /></span>
+                                <span class="edit_class_end_save" data-id={{ lesson.id }}><a>save</a></span>
+                                <span class="edit_class_end_cancel" data-id={{ lesson.id }}><a>cancel</a></span>
+                                <br>
+                            </div>
+
+
+
+                            <span class="fl">Price:<i class="key">&#8377;{{ lesson.price }}</i></span>
+                            <a class="edit_class_price" data-id={{ lesson.id }} style="margin-left: 4px">edit</a> 
+
+                            <div data-id={{ lesson.id }} class="edit_class_price_div">
+                                <span><input class="edit_class_price_input" type="text" /></span>
+                                <br>
+                                <span class="edit_class_price_save" data-id={{ lesson.id }}><a>save</a></span>
+                                <span class="edit_class_price_cancel" data-id={{ lesson.id }}><a>cancel</a></span>
+                                <br>
+                            </div>
+ <a><span style="margin-left:25%; font-size:12px !important; color: green" data-id={{ lesson.id }} class="open_remove_class">Cancel</span></a>
+ <div class="remove_class_div" >
+ <a><span style="margin-left:25%; font-size:12px !important; color: green" data-id={{ lesson.id }} class="remove_class">Remove? <a data-id={{ lesson.id }} class="remove_class">Ok </a><a data-id={{ lesson.id }} class="hide_remove_class"> No</a></span></a>
+ </div>
+
+
+
+                            <div style="background-color:green">
+                            <p style="margin: auto;width: 100%; border: 1px solid green; padding-left: 38%;">Teaching</p>
+                            </div>
+
+
+                            <!-- <span class="fl">Price:<i class="key">{{ lesson.price }} </i></span>
+                            <a style="margin-left: 4px">edit</a> 
+                            <div class="edit_class_price_div">
+                                <span><input  class="edit_class_price" type="text" /></span>
+                            </div>
+                            <span>save</span>
+                            <span>cancel</span> -->
+
+                        </div>
+
+
+                            <!-- <div class="bottom">
+                                <span class="fl">{{ user_course.course.course_org.name }}</span>
+
+                                <span class="star fr  notlogin" data-favid="15">{{ user_course.course.fav_nums }}</span>
+                            </div> -->
+                        </div>
+
+                    {% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<input id="post_ajax_url" type="hidden" value={% url 'users:mylesson' %} >
+<script type="text/javascript">
+    // alert('hi')
+    $('.edit_class_start_div').hide()
+    $('.edit_class_end_div').hide()
+    $('.edit_class_price_div').hide()
+    $('.remove_class_div').hide()
+    post_ajax_url = $('#post_ajax_url').val()
+    load_this_page = function(){
+                            $.ajax({
+                                // url:'/',
+                                url:'',
+                                success:function(res){
+                                    $('body').html(res);
+                                }
+                            })
+                        }
+
+    $(document).ready(function(){
+        
+
+    // edit class start 
+        $('.edit_class_start').click(function(){
+            var id = $(this).attr("data-id")
+            // alert($('.lesson_div').first().html())
+            $('.lesson_div[data-id="'+id+'"] .edit_class_start_div').show()
+            // $('.edit_class_start_div').show()
+        })
+
+        $('.edit_class_start_cancel').click(function(){
+            var id = $(this).attr("data-id")
+            // alert($('.lesson_div').first().html())
+            $('.lesson_div[data-id="'+id+'"] .edit_class_start_div').hide()
+        })
+
+
+        $('.edit_class_start_save').click(function(){
+            var id = $(this).attr("data-id")
+            // alert($('.lesson_div').first().html())
+            var class_start = $('.lesson_div[data-id="'+id+'"] .edit_class_start_input')
+            if(class_start.val()){
+
+                update_start = class_start.val()
+
+                update_start = new Date(update_start).toISOString()
+                update_start = Date.parse(update_start)
+                update_start = Math.abs(update_start)
+                
+                data = {
+                    type:"update_start",
+                    id:id,
+                    updated_time:update_start
+                }
+
+                $.ajax({
+                    method:'POST',
+                    url: post_ajax_url,
+                    data:data,
+                    success: function(res){
+                        console.log(res)
+                        load_this_page()
+                    },
+                    error: function(err){
+                        console.log('Error '+err)
+                    }
+                })
+
+            }else{
+                alert('Insert Valid Data')
+            }
+        })
+
+
+    // edit class end 
+        $('.edit_class_end').click(function(){
+            var id = $(this).attr("data-id")
+            // alert($('.lesson_div').first().html())
+            $('.lesson_div[data-id="'+id+'"] .edit_class_end_div').show()
+            // $('.edit_class_start_div').show()
+        })
+
+        $('.edit_class_end_cancel').click(function(){
+            var id = $(this).attr("data-id")
+            // alert($('.lesson_div').first().html())
+            $('.lesson_div[data-id="'+id+'"] .edit_class_end_div').hide()
+        })
+
+
+        $('.edit_class_end_save').click(function(){
+            var id = $(this).attr("data-id")
+            // alert($('.lesson_div').first().html())
+            var class_end = $('.lesson_div[data-id="'+id+'"] .edit_class_end_input')
+            if(class_end.val()){
+                update_end = class_end.val()
+
+                update_end = new Date(update_end).toISOString()
+                update_end = Date.parse(update_end)
+                update_end = Math.abs(update_end)
+
+
+                data = {
+                    type:"update_end",
+                    id:id,
+                    updated_time:update_end
+                }
+
+                $.ajax({
+                    method:'POST',
+                    url: post_ajax_url,
+                    data:data,
+                    success: function(res){
+                        console.log(res)
+                        load_this_page()
+                    },
+                    error: function(err){
+                        console.log('Error '+err)
+                    }
+                })
+
+            }else{
+                alert('Insert Valid Data')
+            }
+        })
+
+
+    // edit class price
+        $('.edit_class_price').click(function(){
+            var id = $(this).attr("data-id")
+            // alert($('.lesson_div').first().html())
+            $('.lesson_div[data-id="'+id+'"] .edit_class_price_div').show()
+            // $('.edit_class_start_div').show()
+        })
+
+        $('.edit_class_price_cancel').click(function(){
+            var id = $(this).attr("data-id")
+            // alert($('.lesson_div').first().html())
+            $('.lesson_div[data-id="'+id+'"] .edit_class_price_div').hide()
+        })
+
+
+        $('.edit_class_price_save').click(function(){
+            var id = $(this).attr("data-id")
+            // alert($('.lesson_div').first().html())
+            var class_price = $('.lesson_div[data-id="'+id+'"] .edit_class_price_input')
+            if(class_price.val()){
+                data = {
+                    type:"update_price",
+                    id:id,
+                    updated_price:class_price.val()
+                }
+                $.ajax({
+                    method:'POST',
+                    url: post_ajax_url,
+                    data:data,
+                    success: function(res){
+                        console.log(res)
+                        load_this_page()
+                    },
+                    error: function(err){
+                        console.log('Error '+err)
+                    }
+                })
+            }else{
+                alert('Insert Valid Data')
+            }
+        })
+
+
+
+        $('.open_remove_class').click(function(){
+            var id = $(this).attr("data-id")
+            $('.lesson_div[data-id="'+id+'"] .remove_class_div').show()
+        })
+
+
+        $('.hide_remove_class').click(function(){
+            var id = $(this).attr("data-id")
+            $('.lesson_div[data-id="'+id+'"] .remove_class_div').hide()
+        })
+
+
+    // remove class
+        $('.remove_class').click(function(){
+
+            var id = $(this).attr("data-id")
+            data = {
+                type:"remove",
+                id:id
+            }
+            $.ajax({
+                method:'POST',
+                url: post_ajax_url,
+                data:data,
+                success: function(res){
+                    console.log(res)
+                    load_this_page()
+                },
+                error: function(err){
+                    console.log('Error '+err)
+                }
+            })
+
+        })
+
+
+
+
+    })
+</script>
+
+{% endblock %}
+</body>
+</html>

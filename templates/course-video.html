@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+{% block title %}Course content - {{block.super}}{% endblock %}
+{% load staticfiles %}
+{% block custom_bread %}
+<section class="breadCrumbC">
+	<div class="wp">
+		<div class="crumbs">
+			<ul>
+				<li><a href="/">Main</a>></li>
+                <li><a href="{% url 'course:course_list' %}">Courses</a>></li>
+				<li><a href="{% url 'course:course_detail' course.id %}">Course detail</a>></li>
+                <li>Chapter detail</li>
+			</ul>
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+{% block custom_css %}
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/muke/base.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/muke/common-less.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/muke/course/learn-less.css' %}" />
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/aui.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mooc.css' %}"/>
+     <link rel="stylesheet" type="text/css" href="{% static 'css/muke/course/common-less.css' %}"> -->
+{% endblock %}
+
+{% block content %}
+    <div id="main">
+    <div  class="wp">
+    <div class="course-infos chapterHead">
+        <!-- <div class="w pr">
+            <div style="height: 15px" class="path">
+            </div> -->
+            <div class="hd">
+                <h2 class="l">{{ course.name }}</h2>
+            </div>
+            <div class="statics clearfix">
+                <div class="static-item ">
+                    <span class="meta">Live Class Time</span>
+                    <span class="meta-value"><strong>{{course.get_course_time}}</strong></span>
+                    
+                    <em></em>
+                </div>
+                <div class="static-item static-time">
+                        <span class="meta">Duration</span>
+                    <span class="meta-value"><strong>{{ course.learn_times }} mins</strong></span>
+                   
+                    <em></em>
+                </div>
+                <div class="static-item">
+                        <span class="meta">Price</span>
+                    <span class="meta-value"><strong>&#8377;{{course.get_course_price}}</strong></span>
+                  
+                    <em></em>
+                </div>
+                <!-- <div class="static-item">
+                    
+                    <span class="meta-value"><button type="button" id="top_enroll_button" class="btn btn-primary btn-lg">
+                        {% if has_fav_course %}ENROLLED{% else %}ENROLL{% endif %}
+                    </button></span>
+                    <span class="meta">Enroll to start your learning</span>
+                    <em></em>
+                </div> -->
+                {% if UserCourseExist %}
+                    <a id="try_for_free_already_added">
+                        <div class="static-item">
+                        
+                                <span class="meta-value"><strong class="val">Already Added</strong></span>
+                    
+
+                        </div>
+                    </a>
+                {% else %}
+                    <a id="try_for_free">
+                        <div class="static-item">
+                        
+                                <span class="meta-value"><strong class="val">Try For Free</strong></span>
+                    
+
+                        </div>
+                    </a>
+                {% endif %}
+
+            </div>
+            <!-- <a class="btn enrolBtn">Enroll</a> -->
+            <button type="button" id="top_enroll_button" class="btn enrolBtn">
+                        {% if has_fav_course %}ENROLLED{% else %}ENROLL{% endif %}
+            </button>
+        </div>
+    </div>
+
+<div class="wp course-info-main">
+
+<div class="row">
+
+
+    <div class="col-lg-9">
+    
+    <ul class="nav nav-tabs" role="tablist">
+
+            <li class="nav-item">
+                <a class="nav-link active" id="learnOn" data-toggle="tab" href="#chapter"><span>Chapter</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a id="commentOn" class="nav-link" data-toggle="tab" href="#comments"><span>Comments</span></a>
+            </li>
+ 
+          </ul>
+
+
+           <!-- Tab panes -->
+  <div class="tab-content">
+        <div id="chapter" class="tab-pane active"><br>
+            <div class="mod-chapters">
+                    {% for lesson in course.get_course_lesson %}
+                        <div class="chapter chapter-active" >
+
+                       
+                        <h3>
+                            <strong>{{ lesson.detail }}</strong>
+                        		</h3>
+                       
+
+                    </div>
+                    {% endfor %}
+                </div>
+        </div>
+
+
+        <div id="comments" class="tab-pane fade"><br>
+       
+
+
+              <!--leave comments-->
+              <div id="js-pub-container" class="issques clearfix js-form">
+                    <div class="wgt-ipt-wrap pub-editor-wrap " id="js-pl-input-fake">
+                        <textarea id="js-pl-textarea" class="" placeholder="Leave a comment！" ></textarea>
+                    </div>
+                    <button type="button" id="js-pl-submit" class="btn addBtn pub-btn" data-cid="452" value="Send">
+                        Send</button>
+                    <p class="global-errortip js-global-error"></p>
+                </div>
+                <div id="course_note">
+                    <ul class="mod-post" id="comment-list">
+                        {% for user_comments in all_comments %}
+                            <li class="post-row">
+                            <div class="media">
+                                <span target="_blank"><img src='{{ MEDIA_URL }}{{ user_comments.user.image }}' width='40' height='40' /></span>
+                            </div>
+                            <div class="bd">
+                                <div class="tit">
+                                    <span target="_blank">{{ user_comments.user.username }}</span>
+                                </div>
+                                <p class="cnt">{{ user_comments.comments }}</p>
+                                <div class="footer clearfix">
+                                    <span title="Create time" class="l timeago">{{ user_comments.add_time }}</span>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+
+
+
+        </div>
+
+ 
+      </div>
+
+      </div>
+
+ <div class="col-lg-3">
+
+
+        <div class="aside r">
+                <div class="bd">
+
+                 
+                    <div class="box mb40">
+                        <h4>Teacher information</h4>
+                        <div class="teacher-info">
+
+                <div class="photoName clearfix">     
+                            <!-- <a href="{% url 'org:teacher_detail' course.teacher.id %}" target="_blank"> -->
+                            <a target="_blank">
+                                <img src='{{ MEDIA_URL }}{{ course.teacher.image }}' width='80' height='80' />
+                            </a>
+        <span class="tit">
+          <!-- <a href="{% url 'org:teacher_detail' course.teacher.id %}" target="_blank"> -->
+          <a target="_blank">
+              {{ course.teacher.name }}</a>
+        </span>
+
+    </div>       
+
+        <div class="job">{{ course.teacher.work_position }}</div>
+                           
+                        </div>
+                        <div class="course-info-tip">
+                            <dl class="first">
+                                <dt>Course notice</dt>
+                                <dd class="autowrap">{{ course.you_need_know }}</dd>
+                            </dl>
+                            <dl>
+                                <dt>What you will learn from this course？</dt>
+                                <dd class="autowrap">{{ course.teacher_notice }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+
+                 
+
+                </div>   
+            
+            </div>
+
+
+ </div>
+
+</div>
+
+</div>
+
+
+  
+</div>
+
+
+<script type="text/javascript">
+    function add_fav(current_elem, fav_id, fav_type){
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url:'{% url "org:add_fav" %}',
+            data:{'fav_id':fav_id, 'fav_type':fav_type},
+            async: true,
+            beforeSend:function(xhr, settings){
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            },
+            success: function(data) {
+                if(data.status == 'fail'){
+                    if(data.msg == 'Please login first!'){
+                        window.location.href="/login/";
+                    }else{
+                        alert(data.msg)
+                    }
+
+                }else if(data.status == 'success'){
+                    current_elem.text(data.msg)
+                }
+            },
+        });
+    }
+
+    $('#top_enroll_button').on('click', function() {
+        add_fav($(this), {{ course.id }}, 1);
+        // alert('hi')
+    });
+    // $('#jsRightBtn').on('click', function() {
+        // add_fav($(this), {{ course.course_org_id }}, 2);
+    // });
+    function add_try_for_free(data){
+        $.ajax({
+            method:'POST',
+            url:'{% url "users:try_for_free" %}',
+            data:data,
+            success:function(data){
+                    $('#try_for_free .val').html('Course Added')    
+                
+            },
+            error:function(){
+                
+            }
+        })
+    }
+
+    data = {
+        course_id:{{ course.id }}
+    }
+    $('#try_for_free').click(function(){
+        add_try_for_free(data)
+    })
+
+</script>
+
+{% endblock %}
+

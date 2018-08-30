@@ -1,0 +1,372 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Simple Transactional Email</title>
+    <style>
+      /* -------------------------------------
+          GLOBAL RESETS
+      ------------------------------------- */
+      img {
+        border: none;
+        -ms-interpolation-mode: bicubic;
+        max-width: 100%; }
+      body {
+        background-color: #f6f6f6;
+        font-family: sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%; }
+      table {
+        border-collapse: separate;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        width: 100%; }
+        table td {
+          font-family: sans-serif;
+          font-size: 14px;
+          vertical-align: top; }
+      /* -------------------------------------
+          BODY & CONTAINER
+      ------------------------------------- */
+      .body {
+        background-color: #f6f6f6;
+        width: 100%; }
+      /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+      .container {
+        display: block;
+        Margin: 0 auto !important;
+        /* makes it centered */
+        max-width: 580px;
+        padding: 10px;
+        width: 580px; }
+      /* This should also be a block element, so that it will fill 100% of the .container */
+      .content {
+        box-sizing: border-box;
+        display: block;
+        Margin: 0 auto;
+        max-width: 580px;
+        padding: 10px; }
+      /* -------------------------------------
+          HEADER, FOOTER, MAIN
+      ------------------------------------- */
+      .main {
+        background: #ffffff;
+        border-radius: 3px;
+        width: 100%; }
+      .wrapper {
+        box-sizing: border-box;
+        padding: 20px; }
+      .content-block {
+        padding-bottom: 10px;
+        padding-top: 10px;
+      }
+      .footer {
+        clear: both;
+        Margin-top: 10px;
+        text-align: center;
+        width: 100%; }
+        .footer td,
+        .footer p,
+        .footer span,
+        .footer a {
+          color: #999999;
+          font-size: 12px;
+          text-align: center; }
+      /* -------------------------------------
+          TYPOGRAPHY
+      ------------------------------------- */
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #000000;
+        font-family: sans-serif;
+        font-weight: 400;
+        line-height: 1.4;
+        margin: 0;
+        Margin-bottom: 30px; }
+      h1 {
+        font-size: 35px;
+        font-weight: 300;
+        text-align: center;
+        text-transform: capitalize; }
+      p,
+      ul,
+      ol {
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0;
+        Margin-bottom: 15px; }
+        p li,
+        ul li,
+        ol li {
+          list-style-position: inside;
+          margin-left: 5px; }
+      a {
+        color: #3498db;
+        text-decoration: underline; }
+      /* -------------------------------------
+          BUTTONS
+      ------------------------------------- */
+      .btn {
+        box-sizing: border-box;
+        width: 100%; }
+        .btn > tbody > tr > td {
+          padding-bottom: 15px; }
+        .btn table {
+          width: auto; }
+        .btn table td {
+          background-color: #ffffff;
+          border-radius: 5px;
+          text-align: center; }
+        .btn a {
+          background-color: #ffffff;
+          border: solid 1px #3498db;
+          border-radius: 5px;
+          box-sizing: border-box;
+          color: #3498db;
+          cursor: pointer;
+          display: inline-block;
+          font-size: 14px;
+          font-weight: bold;
+          margin: 0;
+          padding: 12px 25px;
+          text-decoration: none;
+          text-transform: capitalize; }
+      .btn-primary table td {
+        background-color: #3498db; }
+      .btn-primary a {
+        background-color: #3498db;
+        border-color: #3498db;
+        color: #ffffff; }
+      /* -------------------------------------
+          OTHER STYLES THAT MIGHT BE USEFUL
+      ------------------------------------- */
+      .last {
+        margin-bottom: 0; }
+      .first {
+        margin-top: 0; }
+      .align-center {
+        text-align: center; }
+      .align-right {
+        text-align: right; }
+      .align-left {
+        text-align: left; }
+      .clear {
+        clear: both; }
+      .mt0 {
+        margin-top: 0; }
+      .mb0 {
+        margin-bottom: 0; }
+      .preheader {
+        color: transparent;
+        display: none;
+        height: 0;
+        max-height: 0;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        mso-hide: all;
+        visibility: hidden;
+        width: 0; }
+      .powered-by a {
+        text-decoration: none; }
+      hr {
+        border: 0;
+        border-bottom: 1px solid #f6f6f6;
+        Margin: 20px 0; }
+      span.price {
+      	float:right;
+      }
+      p.price_desc {
+      	margin-left: 50px;
+      }
+      /* -------------------------------------
+          RESPONSIVE AND MOBILE FRIENDLY STYLES
+      ------------------------------------- */
+      @media only screen and (max-width: 620px) {
+        table[class=body] h1 {
+          font-size: 28px !important;
+          margin-bottom: 10px !important; }
+        table[class=body] p,
+        table[class=body] ul,
+        table[class=body] ol,
+        table[class=body] td,
+        table[class=body] span,
+        table[class=body] a {
+          font-size: 16px !important; }
+        table[class=body] .wrapper,
+        table[class=body] .article {
+          padding: 10px !important; }
+        table[class=body] .content {
+          padding: 0 !important; }
+        table[class=body] .container {
+          padding: 0 !important;
+          width: 100% !important; }
+        table[class=body] .main {
+          border-left-width: 0 !important;
+          border-radius: 0 !important;
+          border-right-width: 0 !important; }
+        table[class=body] .btn table {
+          width: 100% !important; }
+        table[class=body] .btn a {
+          width: 100% !important; }
+        table[class=body] .img-responsive {
+          height: auto !important;
+          max-width: 100% !important;
+          width: auto !important; }}
+      /* -------------------------------------
+          PRESERVE THESE STYLES IN THE HEAD
+      ------------------------------------- */
+      @media all {
+        .ExternalClass {
+          width: 100%; }
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+          line-height: 100%; }
+        .apple-link a {
+          color: inherit !important;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          font-weight: inherit !important;
+          line-height: inherit !important;
+          text-decoration: none !important; }
+        .btn-primary table td:hover {
+          background-color: #34495e !important; }
+        .btn-primary a:hover {
+          background-color: #34495e !important;
+          border-color: #34495e !important; } }
+
+    </style>
+  </head>
+  <body class="">
+    <table border="0" cellpadding="0" cellspacing="0" class="body">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="container">
+          <div class="content">
+
+            <!-- START CENTERED WHITE CONTAINER -->
+            <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+            <table class="main">
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper">
+                  <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        <p>Inf<span style="color:red">yn</span>i </p>
+                        <p>Subject :- Enrollment Confirmations</p>
+                        <p><span style="font-weight: bold">Enrollment ID : </span>{% for i in userCourseEnrollmentId %}{{ i }}, {% endfor %}</p>
+                        <p><span style="font-weight: bold">Course Name : </span>{% for name in course_lessons.name %}{{ name }}, {% endfor %}</p>
+                        <p>Thank you for your enrollment.</p>
+                        <div style="background: linear-gradient(to bottom, #D0D0D0 , #C1C1C1); padding: 5px 5px">
+                          <p style="text-align: center;"><span style="font-weight: bold">Class Start Date and Time: </span></p>
+
+
+
+                        {% for i in enrolled_courses %}
+                              {% for j in i.get_course_full_value.get_course_lesson %}
+                                  
+                                  <!-- <div align="center" style="float:left;width:50%">{{ i.get_course_full_value }} {{ j.name }} :</div> -->
+                                  <div align="center" style="float:left;width:50%">{{ j.live_class_from }}</div>
+
+                                  <br>
+                              {% endfor %}
+                            
+                            
+                        {% endfor %}
+
+
+
+
+
+                        </div>
+                        <h3 style="border-bottom: 1px solid #70A8DA; padding: 15px 10px">Course Details</h3>
+                        <p>Enrollment No : {{ enrollment_no }}</p>
+                        <p>Enrollment On : {{ enrollment_created_date }}</p>
+                        
+                        {% for i in enrolled_courses %}
+            						    <!-- <p class='price_desc'>{{ i }} : Rs.{{ i }}</p> -->
+            						    <!-- <p style="margin-left: 22px float:right" class='price_desc'>{{ lesson_name }}</p> -->
+            						    <!-- <p class='price_desc'>{{ lesson_teacher }}</p> -->
+
+                        <div align="left" style="float:left;width:100%"><b>{{ i.get_course_full_value }}</b></div>
+                        <!-- <div align="right" style="float:left;width:50%">Rs.{{ i.get_course_full_value.get_course_price }}</div> -->
+                        <div>Course List:</div>
+                          {% for j in i.get_course_full_value.get_course_lesson %}
+                            <!-- <div> -->
+                              <div align="left" style="float:left;width:50%">{{ j }}</div>
+                              <div align="right" style="float:left;width:50%">Rs.{{ j.price }}</div>
+                            <!-- </div> -->
+                          {% endfor %}
+
+                        <div>Teacher:- {{ i.get_course_full_value.teacher }}</div>
+                        <br>
+
+            						{% endfor %}
+
+						<h3 style="border-bottom: 1px solid #70A8DA; padding: 15px 10px"></h3>
+
+						<p class='price_desc'>Sub Total (Including GST) <span class="price">Rs.{{ total_price }}</span></p>
+						<p class='price_desc'>Promotion Offer <span class="price">Rs.{{ promotion_price }}</span></p>
+						
+						<p class='price_desc'>Shipping & Handling <span class="price">Rs.{{ shipping_price }}</span></p>
+
+
+						<h3 style="border-bottom: 1px solid #70A8DA; padding: 15px 10px"></h3>
+						<p>Order Total <span class="price">Rs.{{ order_price }}</span></p>
+						<p>In Case of any queries, please feel free to contact us. We’ll be glad to help you.</p>
+						<p>By Enrolment in Course, you agree to infyni's Privacy Notice and conditions of Use. Unless otherwise noted, course  by infyni.com Inc. are subject to GST in accordance with the applicable laws of that state.</p>
+                        <p>This email was sent from a notification-only address that cannot accept incoming email. Please do not reply to this message.</p>
+
+                        <p>For any assistance reach us at <a href="mailto:contact@Infyni.com">contact@Infyni.com</a>.</p>
+                        <p>We Hope to see you again soon.</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+            <!-- END MAIN CONTENT AREA -->
+            </table>
+
+
+
+            <!-- START FOOTER -->
+            <div class="footer">
+              <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="content-block">
+                    <span class="apple-link">©2018 www.Infyni.com | All Rights Reserved.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="content-block powered-by">
+                    Infini 24/25,Shaffi Paradise, 1st Crossing, Abbhiya Reddy Layout, Khaggdaspura, Bangalore- 560093, Karnataka,India.
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- END FOOTER -->
+
+          <!-- END CENTERED WHITE CONTAINER -->
+          </div>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</html>

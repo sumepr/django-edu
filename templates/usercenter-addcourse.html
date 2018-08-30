@@ -1,0 +1,129 @@
+{% extends 'usercenter-base.html' %}
+{% block title %}Add Course-{{block.super}}{% endblock %}
+{% load staticfiles %}
+{% block custom_bread %}
+    <section class="breadCrumbC">
+        <div class="wp">
+            <ul  class="crumbs">
+                <li><a href="{% url 'index' %}">Main</a>></li>
+                <li><a href="{% url 'users:user_info' %}">User center</a>></li>
+                <li>Add Course</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
+{% block right_content %}
+<style>
+#regForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+}
+
+/* Style the input fields */
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+}
+select {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+}
+#regForm p {
+    margin: 20px 0;
+}
+h1::after {
+    border: none;
+}
+
+</style>
+<div class="right">
+    <div class="personal_des ">
+        <div class="head" style="border:1px solid #eaeaea;">
+            <h1>Add Course</h1>
+        </div>
+        <div class="inforcon">
+
+            <form id="regForm" action="">
+                <!-- here data coming from ajax -->
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="application/javascript">
+    var ask_mark_up = function(data){
+        $.ajax({
+          method:"GET",
+          url: '/users/become_instructor_markup_data',
+          data: data,
+          success: function(res){
+            $('#regForm').html(res)
+            // console.log(res)
+          },  
+          error: function(request, status, error){
+            console.log(request+" , "+status+" , "+error)
+          }
+        })
+      }
+$(document).ready(function(){
+    data = {
+      lesson_id:1,
+      step_no: 4
+    }
+    ask_mark_up()
+    // ask_mark_up(data)
+})
+
+</script>
+{% endblock %}

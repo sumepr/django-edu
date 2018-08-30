@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% for key,value in paytm.items %}
+    <!-- {{key}} =  {{value}} <br> -->
+{% endfor %}
+
+{% block title %}Infyni {% endblock %}
+{% load staticfiles %}
+{% block custom_bread %}
+{% endblock %}
+
+{% block custom_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+{% endblock custom_css%}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row c-box overlay">
+    <div class="col-lg-12  col-md-12 col-sm-12">
+        <div class="login-box clearfix ">
+            
+        {% if msg == 'Succesfull' %}
+            <div>
+                <h2 style="font-size: 44px">Payment Succesfull</h2>
+                <br>
+                <p style="font-size: 20px"><b>Redirect Message:</b> {{ reason }}</p>
+                <br>
+                <p style="font-size: 20px">Please Check You Email For Confirmation Message</p>
+            </div>
+        {% else %}
+            <div>
+                <h2 style="font-size: 44px">Payment Failed</h2>
+                <br>
+                <p style="font-size: 20px"><b>Redirect Message:</b> {{ reason }}</p>
+                <br>
+                <!-- <p style="font-size: 20px">Please Check You Email For Confirmation Message</p> -->
+            </div>
+        {% endif %}
+        </div>
+        </div>
+        
+    </div>
+    </div>
+{% endblock content %}

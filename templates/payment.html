@@ -1,0 +1,15 @@
+<html>
+<p>Redirecting to Paytm</p>
+<form method="post" action={{paytm_url}} name="f1">
+<table border="1">
+<tbody>
+{% for key,value in paytmdict.items %}
+    <input type="hidden" name="{{key}}" value="{{value}}">
+{% endfor %}
+</tbody>
+</table>
+<script type="text/javascript">
+document.f1.submit();
+</script>
+</form>
+</html>

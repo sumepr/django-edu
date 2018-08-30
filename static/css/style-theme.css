@@ -1,0 +1,575 @@
+﻿/*=============================================================
+    Authour URI: www.binarytheme.com
+    License: Commons Attribution 3.0
+
+    http://creativecommons.org/licenses/by/3.0/
+
+    100% To use For Personal And Commercial Use.
+    IN EXCHANGE JUST GIVE US CREDITS AND TELL YOUR FRIENDS ABOUT US
+   
+    ========================================================  */
+
+/* =============================================================
+   GENERAL STYLES
+ ============================================================ */
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.set-pad {
+    padding-top:35px;
+}
+.set-row-pad {
+    padding-top:30px;
+    padding-bottom:50px;
+}
+/*=====================================
+  NAVBAR STYLES 
+    ===================================*/
+
+.logo-custom {
+    max-height: 40px;
+}
+
+#menu {
+    background-color: rgba(28, 43, 75, 1);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    min-height: 70px;
+}
+
+
+.navbar-inverse {
+    border-color: transparent;
+}
+
+    .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:hover {
+        color: #FFF;
+        padding: 22px 10px;
+    }
+
+
+/*=====================================
+  HOME STYLES 
+    ===================================*/
+.home-sec {
+    padding-top: 10px;
+    padding-bottom: 60px;
+    background: url(../img/header6.jpg) no-repeat center center;
+    padding: 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+    color: #fff;
+    background-attachment: fixed;
+    height: calc(100vh - 0px);
+    position: relative;
+    padding-top: 60px;
+}
+
+    .home-sec .overlay {
+        background: rgba(0, 0, 0, 0.3);
+        min-height: calc(100vh);
+        position: absolute;
+        width: 100%;
+        top: 0;
+    }
+
+    .home-sec h1 {
+        color: #fff;
+        font-weight: 900;
+        font-size: 50px;
+        text-transform: uppercase;
+        padding-bottom: 35px;
+    }
+
+    .home-sec h3 {
+        text-transform: uppercase;
+        font-size: 30px;
+        color: #f73737;
+        font-weight: 900;
+        margin-bottom:15px
+    }
+
+
+
+.set-flexi {
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
+    -o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
+    background-color: transparent;
+    border: 0px solid #000;
+    padding-top: 250px;
+}
+
+.flex-control-nav {
+    display: none!important;
+}
+
+.set-flexi a {
+    margin: 5px;
+}
+/*=====================================
+  TAG LINE STYLES 
+    ===================================*/
+
+.tag-line {
+    color: #fff;
+    /* background: linear-gradient(rgba(19,19,19,.9),rgba(19,19,19,.9)); */
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+    .tag-line h2 {
+        font-size: 20px;
+        font-weight: 900;
+        padding: 5px 10px 10px 5px;
+        color: #fff;
+    }
+
+        .tag-line h2 > i {
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+/*=====================================
+  HEADER LINE STYLES 
+    ===================================*/
+.header-line {
+    font-weight: 900;
+    font-size: 25px;
+    padding-bottom: 5px;
+    padding-top: 25px;
+    color: #000;
+}
+
+h1::after {
+    content: " ";
+    border: solid 2px #ff3737;
+    display: block;
+    width: 200px;
+    margin: 12px auto;
+}
+
+/*=====================================
+  ABOUT STYLES 
+  ===================================*/
+.about-div {
+    padding: 30px;
+}
+
+.icon-round-border {
+    border: 10px double #1A94C4;
+    color: #2f9484;
+    text-align: center;
+    padding-top: 15px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+    .icon-round-border:hover {
+        color: #fff;
+        border: 10px double #fff;
+        background-color: #1A94C4;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+        -o-transition: 0.3s;
+        transition: 0.3s;
+    }
+
+.about-div hr {
+    border: 1px solid #1A94C4;
+}
+
+.about-div h3 {
+    font-size: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.about-div p {
+    padding-top: 10px;
+}
+
+.btn-set {
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    margin-bottom: 20px;
+}
+/*=====================================
+  FACULTY STYLES 
+  ===================================*/
+#faculty-sec {
+    background-color: #000;
+    color: #fff;
+}
+
+    #faculty-sec .header-line {
+        color: #fff;
+    }
+.faculty-div h4 {
+    line-height:30px;
+    font-weight:700;
+}
+.faculty-div {
+    padding: 30px;
+}
+
+    .faculty-div hr {
+        border: 1px solid #1A94C4;
+    }
+
+    .faculty-div h3 {
+        font-size: 25px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .faculty-div p {
+        padding-top: 10px;
+        padding-bottom: 15px;
+    }
+
+    .faculty-div img {
+        border: 10px double #fff;
+    }
+
+/*=====================================
+  CONTACT STYLES 
+  ===================================*/
+#contact-sec {
+    padding-top: 10px;
+    padding-bottom: 60px;
+    background: url(../img/contact.jpg) no-repeat center center;
+    padding: 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+    color: #fff;
+    background-attachment: fixed;
+}
+
+#contact-sec .overlay {
+        background: rgba(0, 0, 0, 0.76);
+        min-height: 600px;
+    }
+
+    #contact-sec h1 {
+        color:#fff;
+    }
+#contact-sec .form-control{
+    background-color:rgba(255, 255, 255, 0);
+    color:#fff;
+}
+/*=====================================
+  Footer STYLES 
+  ===================================*/
+#footer {
+    padding:5px 20px;
+    background-color:#2d3d5a;
+    text-align:right;
+    color:#fff;
+    font-size:15px;
+}
+
+
+/* UI Changes  by Saroj */
+
+header {position: fixed;
+    width: 100%;
+    z-index: 11;}
+
+.scrolldown .fa {     font-size: 63px;
+    display: block;
+    margin: 0;
+    line-height: 63px;}    
+
+
+.searchWrap{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 400px;
+}
+.searchWrap input {
+    width: 100% !important;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: none;
+    outline: 0;
+    background: rgba(255,255,255,.94);
+    height: 40px;
+}
+
+.srchBtn{    display: flex;
+    align-items: center;
+    cursor: pointer;}
+
+.navContent {justify-content: flex-end;}   
+
+.navbar-nav .nav-link { color: #fff;     font-size: 17px;}
+
+header nav{height: 80px; background: linear-gradient(rgba(15, 14, 32, 0.67),rgb(14, 17, 46));
+}
+
+
+a.navbar-brand {    color: #ff3737;
+    font-weight: 900;
+    font-size: 30px;}
+
+    a.navbar-brand:hover {
+        color: #fff;
+    }    
+header .form-inline { margin-right: 6em}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    right: 0;
+    left: inherit;
+}
+
+.nav-link.dropdown-toggle{    color: #ff2424 !important;}
+.nav-link.dropdown-toggle .fa{  font-size: 20px;}
+
+.scrolldown {color: #ff3737;
+    display: block;
+    width: 60px;
+    height: 60px;
+    border: 1px solid #fff;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;}
+
+.f-list {
+    text-align: center
+}  
+.f-list .fa{    font-size: 35px;
+    color: #ff3531;}
+.f-list  h3 {     font-size: 24px; color: #333 !important;
+    margin: 15px 0; font-weight: 600}
+.f-list  p { font-size: 16px; line-height: 25px}
+
+.f-list  .btn{    background-color: #fff!important;
+    color: #ff3737 !important;
+    border: 1px solid #ff3737;
+    border-radius: 30px; margin-top: 20px}
+
+    .f-list  .btn:hover {
+        background-color: #ff3737!important;
+        color: #fff !important;
+   
+    }    
+
+    .features-sec{    padding-top: 30px;}
+
+    .courseRow {
+      padding: 0; list-style-type: none;
+      margin-left: -15px;
+    margin-right: -15px;
+    }
+    .courseBox {
+        display:inline-block;
+        margin: 15px 15px;
+        padding-bottom: 20px;
+        position: relative;
+        border-bottom: 1px solid #ff3737;
+        transition: all 0.5s ease-in-out;
+        width: 270px;
+        height: 285px;
+        float: left;
+    }
+
+    .courseList-wrap .courseBox {
+        margin: 25px 20px 5px 15px; 
+    }
+
+    .courseBox:hover {
+        transform: scale(1.1)
+    }
+
+    .courseBox  .imgC {
+        width: 270px;
+        overflow: hidden;
+    }
+
+    .courseBox  .imgC  img {    width: 100%;
+        height: 166px;
+        border-radius: 4px;}
+
+    .courseBox .desc h2  {
+        font-size: 15px;
+        font-weight: 600;
+        overflow: hidden;
+        color: #434343;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-top: 10px;
+    }
+
+    .courseBox .desc h3,  .courseBox .desc h4  {
+        font-size: 14px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-top: 5px;
+    }
+
+    .courseBox .desc h3,  .courseBox .provider {width: 68%;}
+
+    .courseBox .desc h3 .key{color: #ff3737 !important;}
+    .courseBox .desc h4 .key{color: #ff3737 !important;}
+
+    .boldT{ font-weight: 600}
+
+
+    .courseBox .bottom {
+        bottom: 15px; 
+    }
+
+    .courseBox .bottom .star { 
+        background: #fff url(../images/star.png) no-repeat 10px center !important;
+        border: 1px solid #ff3737 !important;
+        border-radius: 20px !important;
+    }
+
+
+    .breadCrumbC { margin-top: 80px}
+
+.tab_headerCont {    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;}
+    .tab_header { margin: 0; padding: 0; border: 1px solid #ccc;border-radius: 4px;    width: fit-content;}
+    .tab_header  li { display: block; float: left;}
+    .tab_header  li a { display: block; float: left;border-right: 1px solid #ccc; color: #333;
+        padding: 5px 12px;}
+        .tab_header  li.active a {
+            background: linear-gradient(rgba(15, 14, 32, 0.67),rgb(14, 17, 46));
+            color: #fff;
+        }    
+    .tab_header  li:first-child a { border-radius: 4px 0 0 4px}
+    .tab_header  li:last-child a { border-radius: 0px 4px 4px 0px}
+
+    .courseDtlsPage h2 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    
+    .courseDtlsPage p {
+        font-size: 15px; 
+        font-weight: 400; line-height: 20px; margin-top: 10px
+    }
+
+  .btn {
+        background-color: #fff!important;
+        color: #ff3737 !important;
+        border: 1px solid #ff3737;
+        border-radius: 30px;
+        margin-top: 20px;
+    }
+
+    .btn.addBtn{
+        background-color: #171a35!important;
+        color: #ffffff !important;
+        border: 1px solid #141733;
+        text-transform: inherit;
+    }
+
+    .btn.addBtn{
+        background-color: #171a35!important;
+        color: #ffffff !important;
+        border: 1px solid #141733;
+    }
+
+    .btn.startBtn{    background-color: #ff3737!important;
+        color: #ffffff !important;
+        border: 1px solid #ff3737;
+    }
+
+    .dLevel {
+        margin:20px 0
+    }
+
+    .dLevel .key { font-size: 24px}
+
+
+    .form-row {
+        margin-bottom: 15px
+    }
+
+
+
+    .course-sec .courseBox , .course-sec .courseBox .imgC {
+        width: 250px; 
+    }
+
+    .staticPageC.abt p {
+        margin-bottom: 20px; font-size: 16px
+   }
+
+   .staticPageC.abt h5 span {    font-weight: 600;
+       font-size: 16px; margin-top: 20px}
+
+
+       .staticPageC .card   {border: 1px solid #ccc; box-shadow: none}
+
+       .insideBanner.about {
+        background: url(../images/aboutus.jpg) center #f1f1f1;
+    }
+
+    .insideBanner {
+        position: static;
+        width: 100%;
+        height: 210px;
+        margin-top: 80px;
+        text-align: center;
+        color: #fff;
+        background: url(../images/sbebgblack.jpg) center #f1f1f1;
+        background-position: center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+    }
+
+.staticPageC h2 {    text-align: center;
+margin: 25px 0 10px 0;
+font-size: 30px;}
+
+
+
+.staticPageC h3  {    font-weight: 400;
+font-size: 19px;
+background: #f0f0f0;
+padding: 20px;
+margin: 0 -20px 20px;
+color: #000;}
+
+
+.staticPageC h4   {font-size: 17px;
+font-weight: 600 !important;
+margin-bottom: 15px;}
+
+.staticPageC.terms .card-body { padding-top: 0}
+
+
+.staticPageC ul  {    list-style: inherit;
+margin: 15px;}
+
+.staticPageC a { color: #1A94C4 !important }
+
+.formCW { margin: 0 auto}

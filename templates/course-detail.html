@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% block title %}Course list-{{block.super}}{% endblock %}
+{% load staticfiles %}
+{% block custom_bread %}
+    <section class="breadCrumbC">
+	<div class="wp">
+		<div class="crumbs">
+			<ul>
+				<li><a href="/">Main</a>></li>
+                <li><a href="{% url 'course:course_list' %}">Courses</a>></li>
+				<li>Course detail</li>
+			</ul>
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+{% block content %}
+	<div class="wp courseDtlsPage">
+		<div class="groupPurchase_detail detail">
+			<div class="toppro">
+				<div class="">
+					<div class="picbox">
+						<div class="tb-booth tb-pic">
+                            <img width="440" height="445" src="{{ MEDIA_URL }}{{ course.image }}" class="jqzoom" />
+
+						</div>
+
+                    </div>
+                    
+
+					<div class="des">
+						<h2 title="{{ course.name }}">{{ course.name }}</h2>
+                        <p >{{ course.desc }}</p>
+                        
+						<!-- <div class="dLevel clearfix">
+							<span class="fl"><span>Difficulty：</span><i class="key">{{ course.get_degree_display }}</i></span>
+							<span class="fl ml-5"><span>Students：</span><i class="key">{{ course.students }}</i></span>
+                        </div> -->
+                        
+						<ul class="parameter mt-4">
+							<li>
+                                <span class="pram word3">Learn&nbsp;&nbsp;time:</span>
+                                <span class="value">{{ course.learn_times }} mins</span>
+
+                            </li>
+                            <li>
+                                <span class="pram word3">Number&nbsp;of&nbsp;chapters：</span>
+                                <span class="value">{{ course.get_chapter_nums }}</span>
+                            </li>
+
+                            <li>
+                                <span class="pram word3">Course&nbsp;category：</span>
+                                <span class="value" title="">{{ course.category }}</span>
+                            </li>
+
+							<!-- <li class="piclist"><span class="pram word4">Students：</span>
+                                {% for user_course in course.get_learn_users %}
+                                    <span class="pic"><img width="40" height="40" src={{ MEDIA_URL }}{{ user_course.user.image }}/></span>
+                                {% endfor %}
+                            </li> -->
+                            
+
+
+						</ul>
+						<div class="btns">
+							<!-- <button type="button" class="btn addBtn"  id="jsLeftBtn">
+                                  {% if has_fav_course %}Added{% else %}Add{% endif %}
+                            </button> -->
+                               <a class="btn buy startBtn" href="{% url 'course:course_info' course.id %}">Chapter Details</a>
+                            
+                               <!--  <div class="buy btn"><a style="color: white" href="https://zoom.us/j/8021795417" target="_blank">Start learning</a></div> -->
+						</div>
+                    </div>
+                    
+<!-- 
+                    <div class="group-share-box">
+                        <div class="bdsharebuttonbox"
+                             data-text=""
+                             data-desc=""
+                             data-comment=""
+                             data-url="">
+                            <span class="fl">Share to：</span>
+                            <a href="#" class="bds_more" data-cmd="more"></a>
+                            <a title="" href="#" class="bds_qzone" data-cmd="qzone"></a>
+                            <a title="" href="#" class="bds_tsina" data-cmd="tsina"></a>
+                            <a title="" href="#" class="bds_tqq" data-cmd="tqq"></a>
+                            <a title="" href="#" class="bds_renren" data-cmd="renren"></a>
+                            <a title="" href="#" class="bds_weixin" data-cmd="weixin"></a>
+                        </div>
+                    </div> -->
+
+
+
+				</div>
+				<!-- <div class="right">
+					<div class="head">
+						<h1>Organization</h1>
+						<p>"Stay&nbsp;hungry,&nbsp;stay&nbsp;foolish."</p>
+					</div>
+					<div class="pic">
+                        <a href="{% url 'org:org_home' course.course_org.id %}">
+                            <img width="150" height="80" src="{{ MEDIA_URL }}{{ course.course_org.image }}"/>
+                        </a>
+                    </div>
+					<a href="{% url 'org:org_home' course.course_org.id %}">
+                        <h2 class="center" title="{{ course.course_org.name }}">{{ course.course_org.name }}</h2>
+                    </a>
+					<div class="btn  notlogin
+					     "data-favid="14" id="jsRightBtn">
+                         {% if has_fav_org %}Added{% else %}Like{% endif %}
+                    </div>
+					<div class="clear">
+						<ul>
+                            <li>
+                                <span>Total&nbsp;courses:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ course.course_org.courses }}</span>
+                            </li>
+                            <li>
+                                <span>Teachers:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ course.course_org.get_teacher_nums }}</span>
+                            </li>
+							<li>Address：&nbsp;&nbsp;{{ course.course_org.address }}</li>
+							<li>Verified:
+                                &nbsp;&nbsp;
+								    <img title="Organization", src="{% static 'images/gold.png' %}"/>
+							</li>
+						</ul>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+        <section>
+	<div class="wp">
+		<div class="list groupPurchase_detail_pro">
+
+			<div class="">
+
+
+					<div class="tab_headerCont">
+					<ul class="tab_header clearfix">
+						<li class="active"><a href="#">Course detail</a></li>
+					</ul>
+                </div>
+                
+
+				<div class="tab_cont1 pt-2">
+                    {% autoescape off %}
+                    {{ course.detail }}
+                    {% endautoescape %}
+				</div>
+				<div class="tab_cont2" >
+					<div class="comment">
+						<div class="comenlist">
+
+	                    </div>
+					</div>
+				</div>
+            </div>
+            
+			 
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+function add_fav(current_elem, fav_id, fav_type){
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:'{% url "org:add_fav" %}',
+        data:{'fav_id':fav_id, 'fav_type':fav_type},
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'fail'){
+                if(data.msg == 'Please login first!'){
+                    window.location.href="/login/";
+                }else{
+                    alert(data.msg)
+                }
+
+            }else if(data.status == 'success'){
+                current_elem.text(data.msg)
+            }
+        },
+    });
+}
+/*
+$('#jsLeftBtn').on('click', function() {
+    add_fav($(this), {{ course.id }}, 1);
+});
+$('#jsRightBtn').on('click', function() {
+    add_fav($(this), {{ course.course_org_id }}, 2);
+});*/
+</script>
+{% endblock %}

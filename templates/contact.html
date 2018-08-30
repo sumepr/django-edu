@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block css %}
+    <style>
+        .form-group .help-block {
+            display: none;
+        }
+        .form-group.has-error .help-block {
+            display: block;
+        }
+        input[name='decoy'],
+        p.decoy {
+            display: none !important;
+        } 
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+
+
+<section class="insideBanner about">
+        <div class="container"></div>
+    </section>
+
+<div id="main">
+    <div  class="wp">
+
+
+            <div class="staticPageC abt">
+  
+			
+                    <div class="tab_headerCont">
+                                            <h2>Contact Us</h2>
+                                        </div>
+                                        
+                                        
+                                        
+                    <div class="card mb-5 mt-3" > 
+                      <div class="card-body">
+
+
+
+
+                            <div class=""> 
+                                    <div class="row contact_us_form">
+
+                                        
+                                         
+                                        <div class="col-lg-6  col-md-8 col-sm-8 formCW ">
+                                                <h4 class="col-12">We'd Love To Hear From You</h4>   
+                                        <form action="." method="post" name="feedback" class="form-horizontal">{% csrf_token %}
+                                            <div class="form-group {% if form.name.errors %}has-error{% endif %}">
+                                                <label for="name" class="col-sm-12 control-label">Name</label>
+                                                <div class="col-12">
+                                                    <input type="text" name="name" class="form-control"
+                                                    value="{% if form.data.name %}{{form.data.name}}{% else %}{{form.initial.name}}{% endif %}" 
+                                                    placeholder="Enter Your Name" />
+                                                    <!-- <p class="help-block">Name is a required field</p> -->
+                                                </div>
+                                            </div>    
+                                            <div class="visualclear"></div>
+                                            <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                                                <label for="email" class="col-sm-12 control-label">E-mail Address</label>
+                                                <div class="col-12">
+                                                    <input class="form-control" type="text" name="email"
+                                                     value="{% if form.data.email %}{{form.data.email}}{% else %}{{form.initial.email}}{% endif %}" placeholder="Email We Will Contact You" />
+                                                    <div class="visualclear"></div>                
+                                                    <!-- <p class="help-block">A valid e-mail address is required.</p> -->
+                                                </div>
+                                            </div> 
+                                            <div class="visualclear"></div>
+                                            <div class="form-group {% if form.subject.errors %}has-error{% endif %}">
+                                                <label for="subject"  class="col-sm-12 control-label">Subject</label>
+                                                <div class="col-12">
+                                                    {{form.subject}}
+                                                    <!-- <p class="help-block">Subject is a required field.</p> -->
+                                                </div>
+                                            </div> 
+                                            <div class="form-group {% if form.description.errors %}has-error{% endif %}">
+                                                <label for="description" class="col-sm-12 control-label">Description</label>
+                                                <div class="col-12">
+                                                    {{form.description}}
+                                                    <!-- <p class="help-block">Description is a required field.</p> -->
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group {% if form.decoy.errors %}has-error{% endif %}">
+                                                <input type="text" name="decoy" value="" placeholder="Please leave blank" autofill="off" />
+                                                <p class="help-block decoy">If you can see the decoy field, please leave it blank.</p>
+                                            </div> -->
+                                
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <button class="btn startBtn pull-right " type="submit" value="Send Feedback"> Send Feedback </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                  </div>
+
+
+
+
+                        </div>
+
+                        </div>
+
+                        </div>
+
+
+        </div>
+
+        </div>
+
+
+{% endblock %}

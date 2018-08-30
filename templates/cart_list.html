@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block custom_js %}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/cart_payment/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Material Design Bootstrap 
+    <link href="{% static 'css/cart_payment/css/mdb.min.css' %}" rel="stylesheet">
+    -->
+
+{% endblock %}
+{% block content %}
+
+
+
+<section class="breadCrumbC">
+        <div class="wp">
+            <div class="crumbs">
+                <ul>
+                    <li><a href="">Main</a>></li>
+                    <li>Cart list</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!--Main Layout-->
+	
+ 
+    <main class="cartList-cont">
+
+     
+
+        <!-- Main Container -->
+        <div class="wp ">
+
+
+                <div class="chapterHead">
+                    
+                    
+                    <ul class="cart-list-box clearfix">
+
+                        <li class="imageC">&nbsp;</li>
+
+                        <li class="nameC">
+                          Course Name
+                        </li>
+
+                        <li class="dateC">
+                            Course Date
+                        </li>
+
+                            <li class="amountC">
+                              Amount (&#8377;)
+                            </li>
+
+                                <li class="actionC">
+                                Remove
+                                </li>
+
+                            </ul>
+
+
+                </div>
+
+
+                <div class="cartBody mb-4">
+                    
+                        {% for fav in user_fav %}
+                    
+                        <ul class="cart-list-box clearfix">
+    
+                            <li class="imageC">
+
+                                    <img src="{{ MEDIA_URL }}{{ fav.get_course_full_value.image }}" alt="" class="img-fluid z-depth-0">
+
+                            </li>
+    
+                            <li class="nameC">
+                                    {{ fav.get_course_full_value.name }}
+                            </li>
+    
+                            <li class="dateC">
+                                    {{ fav.get_course_full_value.add_time }}
+                            </li>
+    
+                                <li class="amountC">
+                                       &#8377;{{ fav.get_course_full_value.get_course_price }} 
+                                </li>
+    
+                                    <li class="actionC">
+                                            <button onclick="add_fav({{ fav.get_course_full_value.id }})" type="button" class="remove_cart_item removeCartBtn" >X</button> 
+                                    </li>
+    
+                                </ul>
+    
+                                {% endfor %}
+
+            <ul class="cart-list-box clearfix flexEndv">
+
+           
+
+            <li class="amountC">
+               Total
+            </li>
+            
+            <li class="text-right">
+                                    <h4 class="mt-2">
+                                        <strong>&#8377;{{ total_price }}</strong>
+                                    </h4>
+                                </li>
+ 
+
+            <li class="dateC">
+                    {% if total_price == 0 %}
+                    <button type="button" disabled="disabled" class="btn startBtn m-0">Complete Enrollment
+                    <i class="fa fa-angle-right right"></i>
+                    </button>
+                {% else %}
+                    <a href="{% url 'cart_payment:checkout' %}">
+                    <!-- <a href="{% url 'cart_payment:payment' %}"> -->
+                    <button type="button" class="btn startBtn m-0">Complete Enrollment
+                        <i class="fa fa-angle-right right"></i>
+                    </button>
+                    </a>
+                {% endif %}
+            </li>
+
+            </ul>
+
+
+
+                    </div>
+
+
+
+  
+
+        </div>
+        <!-- /Main Container -->
+
+    </main>
+    <!--Main Layout-->
+
+    
+    <script type="text/javascript" src="{% static 'js/cart_payment/js/jquery-3.2.1.min.js' %}"></script>
+    <!-- SCRIPTS -->
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="{% static 'js/cart_payment/js/jquery-3.2.1.min.js' %}"></script>
+
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="{% static 'js/cart_payment/js/popper.min.js' %}"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- <script type="text/javascript" src="{% static 'js/cart_payment/js/bootstrap.min.js' %}"></script> -->
+
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{% static 'js/cart_payment/js/mdb.min.js' %}"></script>
+    <script type="text/javascript">
+
+        function add_fav(fav_id, fav_type=1){
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url:'{% url "org:add_fav" %}',
+                data:{'fav_id':fav_id, 'fav_type':fav_type},
+                async: true,
+                beforeSend:function(xhr, settings){
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                },
+                success: function(data) {
+                    // window.location.href="/";
+                    $.ajax({
+                        url:'.',
+                        success:function(data){
+                            $('body').html(data)
+                        }
+                    })
+                },
+            });
+        }
+
+    </script>
+    <script type="text/javascript">
+        /* WOW.js init */
+        new WOW().init();
+
+        // MDB Lightbox Init
+        $(function () {
+            $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
+        });
+
+        // Tooltips Initialization
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
+    </script>
+    <script>
+        // Material Select Initialization
+        $(document).ready(function () {
+            $('.mdb-select').material_select();
+        });
+    </script>
+
+{% endblock %}
+
+
+    
+
+</body>
+
+</html>

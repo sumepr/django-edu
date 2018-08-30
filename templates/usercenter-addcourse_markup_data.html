@@ -1,0 +1,422 @@
+<!-- start course category -->
+
+{% if step_no == 1 %}
+
+<div><h1>Select Category:</h1>
+
+  <p><select id="selected_category">
+        <option value="0"></option>
+        {% for foo in course_category %}
+            <option value="{{ foo.id }}">{{ foo.name }}</option>
+        {% endfor %}
+
+    </select>
+  </p>
+</div>
+
+<!-- Circles which indicates the steps of the form: -->
+
+<div style="overflow:auto;">
+  <div style="float:right;">
+    <!-- <button type="button" id="prevBtn" class="previousBtnFirst">Back</button> -->
+    <button type="button" id="nextBtn" class="nextBtnFirst">Next</button>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:40px;">
+  <span class="step active"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+</div>
+{% endif %}
+<!-- end course category -->
+
+
+<!-- start course list -->
+{% if step_no == 2 %}
+<h3><b>Category Selected: {{ course_category }} <b></h3>
+<h3 style="word-wrap: break-word"><b>Category Details: {{ course_category.description }} <b></h3>
+<div>Course List:
+  <select id="selected_course">
+        <option value="0"></option>
+        {% for foo in courses %}
+            <option value="{{ foo.id }}">{{ foo.name }}</option>
+        {% endfor %}
+
+    </select><br><br>
+</div>
+
+<!-- Circles which indicates the steps of the form: -->
+
+<div style="overflow:auto;">
+  <div style="float:right;">
+    <button type="button" id="cancelBtn" class="cancelBtnSecond cancelBtn">Cancel</button>
+    <button type="button" id="prevBtn" class="previousBtnSecond" >Back</button>
+    <button type="button" id="nextBtn" class="nextBtnSecond">Next</button>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:40px;">
+  <span class="step finish"></span>
+  <span class="step active"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+</div>
+
+{% endif %}
+<!-- end course list -->
+
+
+
+<!-- start course details and lesson description -->
+{% if step_no == 3 %}
+<h3><b>Category Selected:  {{ course_obj.course_category }} <b></h3>
+<h3 style="word-wrap: break-word"><b>Category Details: {{ course_obj.course_category.description }} <b></h3>
+<h3><b>Course Selected: {{ course_obj }} <b></h3>
+<h3 style="word-wrap: break-word"><b>Course Selected: {{ course_obj.detail }} <b></h3>
+<div>Lesson List:
+  <select id="selected_lesson">
+        <option value="0"></option>
+        {% for foo in lessons %}
+            <option value="{{ foo.id }}">{{ foo.name }}</option>
+        {% endfor %}
+
+  </select><br><br>
+</div>
+
+<!-- Circles which indicates the steps of the form: -->
+<input type="hidden" id="step_3_hidden_category_id" class="" value="{{ course_obj.course_category.id }}"/>
+<div style="overflow:auto;">
+  <div style="float:right;">
+    <button type="button" id="cancelBtn" class="cancelBtnThird cancelBtn">Cancel</button>
+    <button type="button" id="prevBtn" class="previousBtnThird" >Back</button>
+    <button type="button" id="nextBtn" class="nextBtnThird">Next</button>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:40px;">
+  <span class="step finish"></span>
+  <span class="step finish"></span>
+  <span class="step active"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+</div>
+
+{% endif %}
+<!-- end course details and lesson description -->
+
+
+
+<!-- start from and to time , price insert  -->
+{% if step_no == 4 %}
+<h3><b>Category Selected:  {{ course_obj.course_category }} <b></h3>
+<h3 style="word-wrap: break-word"><b>Category details:  {{ course_obj.course_category.description }} <b></h3>
+<h3><b>Course Selected: {{ course_obj }} <b></h3>
+<h3 style="word-wrap: break-word"><b>Course Details: {{ course_obj.detail }} <b></h3>
+<h3><b>Lesson Selected: {{ lesson.name }} <b></h3>
+<h3 style="word-wrap: break-word"><b>Lesson Details: {{ lesson.detail }} <b></h3>
+  
+    <p><!-- You have selected lesson: {{ lesson.name }} --></p>
+  
+  <input id="hidden_lesson_id" type="hidden"" value="{{ lesson.id }}">
+  <input type="hidden" id="step_4_hidden_course_id" value={{ course_obj.id }} />
+  <!-- <p><input id="lesson_start_date" type="datetime-local" placeholder="Start From..." ></p> -->
+
+
+
+<div>
+<span style="float: left; margin-right: 2%;">Starts </span>
+<span style="float: right; margin-right: 2%;">Ends </span>
+</div>
+<br>
+<div style="margin-bottom:px">
+
+  
+  <input style="width: 45%;float: left;" type="datetime-local" class="form-control" type="text" id="lesson_start_date" value={{ lesson_start_date_str }}>
+
+  <input style="width: 45%; float: right;" type="datetime-local" class="form-control" type="text" id="lesson_end_date" value={{ lesson_end_date_str }}>
+  
+<br>
+</div>
+
+
+
+  <!-- <p><input id="lesson_end_date" type="datetime-local" placeholder="End From..."></p> -->
+  <p><input class="form-control" id="lesson_price" placeholder="Price" value="{{ hidden_id_price }}" ></p>
+</div>
+
+<!-- Circles which indicates the steps of the form: -->
+
+<div style="overflow:auto;">
+  <div style="float:right;">
+    <button type="button" id="cancelBtn" class="cancelBtnFourth cancelBtn">Cancel</button>
+    <button type="button" id="prevBtn" class="previousBtnFourth" >Back</button>
+    <button type="button" id="nextBtn" class="nextBtnFourth">Next</button>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:40px;">
+  <span class="step finish"></span>
+  <span class="step finish"></span>
+  <span class="step finish"></span>
+  <span class="step active"></span>
+  <span class="step"></span>
+</div>
+
+{% endif %}
+<!-- end from and to time , price insert  -->
+
+
+
+<!-- start show all selected and save to db -->
+{% if step_no == 5 %}
+<div><!-- Lesson Add -->
+
+    <h3><b>You have selected Course:</b> {{ lesson.course.name }}</h3>
+    <h4 style="word-wrap: break-word"><b>Details:</b> {{ lesson.course.detail }}</h4>
+    <h3><b>You have selected Lesson:</b> {{ lesson.name }}</h3>
+    <h4  style="word-wrap: break-word"><b>Details:</b> {{ lesson.detail }}</h4>
+    <li><b>Start From:</b> {{ class_from }}</li>
+    <li><b>End:</b> {{ class_to }}</li>
+    <li><b>Price:</b> {{ price }}</li>
+    <input type="hidden" id="final_lesson_id" value="{{ lesson.id }}"/>
+    <input type="hidden" id="final_class_from" value="{{ class_from_timestamp }}"/>
+    <input type="hidden" id="final_class_to" value="{{  class_to_timestamp }}"/>
+    <input type="hidden" id="final_price" value="{{ price }}"/>
+
+</div>
+
+<!-- Circles which indicates the steps of the form: -->
+
+<div style="overflow:auto;">
+  <div style="float:right;">
+    <button type="button" id="cancelBtn" class="cancelBtnFifth cancelBtn">Cancel</button>
+    <button type="button" id="prevBtn" class="previousBtnFifth" >Back</button>
+    <button type="button" id="nextBtn" class="nextBtnFifth">save</button>
+  </div>
+</div>
+<input type="hidden" value={{ lesson_start_date_str }} id="hidden_id_lesson_start_date_str" />
+<input type="hidden" value={{ lesson_end_date_str }} id="hidden_id_lesson_end_date_str" />
+<input type="hidden" value={{ price }} id="hidden_id_price" />
+
+<div style="text-align:center;margin-top:40px;">
+  <span class="step finish"></span>
+  <span class="step finish"></span>
+  <span class="step finish"></span>
+  <span class="step finish"></span>
+  <span class="step active"></span>
+</div>
+
+{% endif %}
+<!-- end show all selected and save to db -->
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+  $('.nextBtnFirst').click(function(){
+      
+    category_id = $('#selected_category').val()
+    if (category_id < 1){
+      alert('Please Select One Categroy First')
+      return
+    }
+     
+    data = {
+      category_id:category_id,
+      step_no:2
+    }
+    ask_mark_up(data)
+
+  })
+
+    $('.previousBtnFirst').click(function(){
+
+      ask_mark_up()
+
+  })
+
+
+
+
+
+    $('.nextBtnSecond').click(function(){
+
+      course_id = $('#selected_course').val()
+      if (course_id < 1){
+        alert('Please Select One Course First')
+        return
+      }
+       
+      data = {
+        course_id:course_id,
+        step_no:3
+      }
+      ask_mark_up(data)
+  })
+
+    $('.previousBtnSecond').click(function(){
+      
+      ask_mark_up()
+
+  })
+
+
+
+
+
+    $('.nextBtnThird').click(function(){
+
+      lesson_id = $('#selected_lesson').val()
+      if (lesson_id < 1){
+        alert('Please Select One Lesson First')
+        return
+      }
+       
+      data = {
+        lesson_id:lesson_id,
+        step_no:4
+      }
+      ask_mark_up(data)
+  })
+
+    $('.previousBtnThird').click(function(){
+      step_3_hidden_category_id = $('#step_3_hidden_category_id').val()
+      data = {
+        category_id:step_3_hidden_category_id,
+        step_no:2
+      }
+
+      ask_mark_up(data)
+      
+
+  })
+
+
+
+    //only for third page
+    $('#lesson_start_date').keyup(function(){
+      lesson_start_date = $('#lesson_start_date').val()
+      lesson_end_date = $('#lesson_end_date').val()
+      if(lesson_end_date == '')
+        $('#lesson_end_date').val(lesson_start_date)
+    })
+
+    // alert({{ lesson_start_date_str  }})
+    $('.nextBtnFourth').click(function(){
+    
+    // lesson_start_date = $('#lesson_start_date').val()
+    // lesson_start_date = new Date(lesson_start_date).toISOString()
+    // alert(typeof(lesson_start_date))
+    // return
+
+// if all seleceed / if start and enddate greate than today / price should be gretter than 0 / 
+
+  
+    lesson_selected = $('#hidden_lesson_id').val()
+    lesson_price = $('#lesson_price').val()
+    lesson_start_date = $('#lesson_start_date').val()
+    lesson_end_date = $('#lesson_end_date').val()
+
+    if (!lesson_price || !lesson_start_date || !lesson_end_date){
+      alert('Fill Up The Form Correctly')
+      return 
+    }
+
+      lesson_start_date_str = new Date(lesson_start_date).toISOString()
+      lesson_start_date = new Date(lesson_start_date).toISOString()
+      lesson_start_date = Date.parse(lesson_start_date)
+      lesson_start_date = Math.abs(lesson_start_date)
+
+      lesson_end_date_str =  new Date(lesson_end_date).toISOString()
+      lesson_end_date =  new Date(lesson_end_date).toISOString()
+      lesson_end_date = Date.parse(lesson_end_date)
+      lesson_end_date = Math.abs(lesson_end_date)
+
+
+      // today = new Date()
+      // today = Date.parse(today)
+
+      if (new Date().getTime() > lesson_start_date){
+        // alert('Start Time Must Be Greater Than Current Time')
+        // return 
+      }
+
+      if (lesson_start_date >= lesson_end_date){
+        alert('End Time Must Be Greater Than Start Time')
+        return 
+      }
+
+
+      data = {
+        lesson_start_date_str:lesson_start_date_str,
+        lesson_end_date_str:lesson_end_date_str,
+
+        lesson_id: lesson_selected,
+        price: lesson_price,
+        class_from: lesson_start_date,
+        class_to: lesson_end_date,
+        step_no:5
+      }
+      // alert(lesson_selected)
+      ask_mark_up(data)
+  })
+
+    $('.previousBtnFourth').click(function(){
+      step_4_hidden_course_id = $('#step_4_hidden_course_id').val()
+      data = {
+        step_no:3,
+        course_id:step_4_hidden_course_id
+      }
+
+      ask_mark_up(data)
+
+      
+  })
+
+
+
+
+    $('.nextBtnFifth').click(function(){
+      
+      lesson_id = $('#final_lesson_id').val()
+      price = $('#final_price').val()
+      class_from = $('#final_class_from').val()
+      class_to = $('#final_class_to').val()
+      data = {
+        lesson_id : lesson_id,
+        price : price,
+        class_start : class_from,
+        class_end : class_to,
+        step_no:6
+      }
+      ask_mark_up(data)
+  })
+
+    $('.previousBtnFifth').click(function(){
+      hidden_id_lesson_start_date_str = $('#hidden_id_lesson_start_date_str').val()
+      hidden_id_lesson_end_date_str = $('#hidden_id_lesson_end_date_str').val()
+      hidden_id_price = $('#hidden_id_price').val()
+      // ask_mark_up()
+      data = {
+        lesson_id: 1,
+        step_no:4,
+        hidden_id_lesson_start_date_str:hidden_id_lesson_start_date_str,
+        hidden_id_lesson_end_date_str :hidden_id_lesson_end_date_str,
+        hidden_id_price:hidden_id_price
+      }
+      ask_mark_up(data)
+
+  })
+
+  $('.cancelBtn').click(function(){
+      
+      ask_mark_up()
+
+  })
+
+})
+
+</script>

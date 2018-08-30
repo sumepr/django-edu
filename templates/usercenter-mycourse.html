@@ -1,0 +1,64 @@
+{% extends 'usercenter-base.html' %}
+{% block title %}My Enrollment-{{block.super}}{% endblock %}
+
+{% block custom_bread %}
+    <section class="breadCrumbC">
+        <div class="wp">
+            <ul  class="crumbs">
+                <li><a href="{% url 'index' %}">Main</a>></li>
+                <li><a href="{% url 'users:user_info' %}">User center</a>></li>
+                <li>Registered courses</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
+{% block right_content %}
+    <div class="right" >
+        <div class="personal_des Releasecont">
+                <div class="tab_headerCont">
+                        <ul class="tab_header clearfix">
+                            <li class="active"><a href=" "> My Live Online Class</a></li> 
+                        </ul>
+                    </div>
+        </div>
+        <div class="personal_des permessage">
+            <div class="companycenter">
+
+                    <ul class="courseRow clearfix">
+
+                    {% for user_course in user_courses %}
+                    <li class="clearfix courseBox" style="border-bottom:0; height:0% ">
+                            <a class="d-block clearfix" href="{% url 'course:course_detail' user_course.course.id %}">
+                                    <div class="imgC">
+                                <img  class="scrollLoading" src="{{ MEDIA_URL }}{{ user_course.course.image }}"/>
+                                </div>
+                            
+                            <div class="des">
+                            
+                            <a href="{{ online_course }}" target="_blank"><h3 style="color:green"><img width="16px" src="https://png.icons8.com/color/1600/video-call.png"/> Live Online Class</h3></a>
+                            {{ first_lesson_start_from|date:'M d, Y' }}  </i></span>
+
+                               <h2>{{ user_course.course.name }}</h2>
+                                <span class="fl">Duration:<i class="key">{{ user_course.course.learn_times }}</i></span>
+                                <!-- <span class="fr">Students:{{ user_course.course.students }}</span> -->
+                            </div>
+                        </a>
+
+                            <div class="bottom" style="color:Green; text-align:left">
+                            <img width="14px" src="https://vignette.wikia.nocookie.net/moshimonsters/images/2/29/Tick.png/revision/latest?cb=20140819231447"/>
+
+                                Attending
+                            </div>
+
+                        </li>
+
+                    {% endfor %}
+                    </ul>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>
